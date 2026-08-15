@@ -1,0 +1,140 @@
+"""Step 9c: zero-shot instruction-tuned language model baseline.
+
+This baseline exists because it is the only language model in the comparison that
+is genuinely independent of the label source. The annotator cannot be used as an
+evaluated system, having written the guideline and produced the labels, so we run
+a small open instruction-tuned model locally instead.
+
+The model is never asked to generate. We score the two label continuations under
+the same prompt and take the higher, which removes parsing failures, refusals,
+and format drift from the measurement, and makes the comparison across context
+widths a comparison of the model rather than of its output formatting.
+"""
+import json, os, sys
+import numpy as np
+import pandas as pd
+from sklearn.metrics import f1_score, accuracy_score
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import OUT
+
+MODEL = os.environ.get("LLM_MODEL", "microsoft/Phi-3.5-mini-instruct")
+BACKEND = os.environ.get("LLM_BACKEND", "mlx" if "mlx" in MODEL.lower() else "hf")
+DISPLAY = os.environ.get("LLM_DISPLAY") or MODEL.split("/")[-1]
+CONTEXTS = os.environ.get("LLM_CONTEXTS", "SENT,W256,W1024,W4096").split(",")
+MAXTOK = int(os.environ.get("LLM_MAXTOK", 1600))
+if BACKEND == "hf":
+    import torch
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    DEV = os.environ.get("LLM_DEVICE") or ("mps" if torch.backends.mps.is_available()
+                                           else "cpu")
+else:
+    DEV = os.environ.get("LLM_DEVICE", "cpu")
+
+PROMPT = (
+    "You are reading a passage from a United States federal appellate opinion.\n\n"
+    "Legal issue: {issue}\n\n"
+    "Passage:\n{ctx}\n\n"
+    "Question: Did the court that wrote this opinion resolve that issue, or did "
+    "it discuss the issue and leave it unresolved?\n"
+    "Answer with one word, either DECIDED or UNRESOLVED.\n"
+    "Answer:")
+
+
+def encode(tok, text, special=False):
+    """Token ids for `text`. MLX wraps the tokenizer, so unwrap it if present."""
+    base = getattr(tok, "_tokenizer", tok)
+    return base(text, add_special_tokens=special)["input_ids"]
+
+
+def label_logprobs(model, tok, prompts, options):
+    """Return, for each prompt, the summed log-probability of each option.
+
+    Identical arithmetic under both backends. Appending the option to the
+    prompt, the logit at position len(base)+k-1 predicts option token k, so the
+    slice starting at len(base)-1 lines up with the option one for one.
+    """
+    opt_ids = [encode(tok, o) for o in options]
+    out = np.zeros((len(prompts), len(options)))
+    if BACKEND == "mlx":
+        import mlx.core as mx
+    for i, p in enumerate(prompts):
+        if BACKEND == "mlx":
+            base = encode(tok, p, special=True)[:MAXTOK]
+            for j, oid in enumerate(opt_ids):
+                logits = model(mx.array([base + oid]))
+                sl = logits[0, len(base) - 1:len(base) - 1 + len(oid)].astype(mx.float32)
+                lp = sl - mx.logsumexp(sl, axis=-1, keepdims=True)
+                out[i, j] = float(sum(lp[k, t].item() for k, t in enumerate(oid)))
+        else:
+            base = tok(p, return_tensors="pt", truncation=True, max_length=MAXTOK)
+            base = {k: v.to(DEV) for k, v in base.items()}
+            for j, oid in enumerate(opt_ids):
+                ids = torch.cat([base["input_ids"],
+                                 torch.tensor([oid], device=DEV)], dim=1)
+                with torch.no_grad():
+                    logits = model(input_ids=ids).logits
+                lp = torch.log_softmax(logits[0, -len(oid) - 1:-1].float(), dim=-1)
+                out[i, j] = float(sum(lp[k, t] for k, t in enumerate(oid)))
+        if i % 25 == 0:
+            print(f"    scored {i}/{len(prompts)}", file=sys.stderr, flush=True)
+    return out
+
+
+def main():
+    df = pd.read_parquet(os.path.join(OUT, "09_items_with_ctx.parquet"))
+    where = "mlx/metal" if BACKEND == "mlx" else DEV
+    print(f"model {MODEL} on {where}; items {len(df):,}", flush=True)
+    if BACKEND == "mlx":
+        from mlx_lm import load as mlx_load
+        model, tok = mlx_load(MODEL)
+    else:
+        tok = AutoTokenizer.from_pretrained(MODEL)
+        # bfloat16 halves resident weights. Logits are cast back to float32
+        # before the log-softmax, so the scores themselves are not computed in
+        # low precision, only the forward pass.
+        dt = {"bf16": torch.bfloat16, "fp16": torch.float16,
+              "fp32": torch.float32}[os.environ.get("LLM_DTYPE", "bf16")]
+        model = AutoModelForCausalLM.from_pretrained(MODEL, dtype=dt).to(DEV).eval()
+
+    options = [" DECIDED", " UNRESOLVED"]
+    rows, preds_all = [], []
+    for ctx in CONTEXTS:
+        col = f"ctx_{ctx}"
+        for split in ("TEST", "TEMPORAL", "COURT"):
+            te = df[df["split"] == split]
+            if not len(te):
+                continue
+            prompts = [PROMPT.format(issue=str(a)[:300], ctx=str(b)[:12000])
+                       for a, b in zip(te["issue"], te[col])]
+            lp = label_logprobs(model, tok, prompts, options)
+            p = lp.argmax(1)
+            rows.append({"model": DISPLAY, "context": ctx,
+                         "split": split, "n": int(len(te)),
+                         "acc": float(accuracy_score(te["y"], p)),
+                         "macro_f1": float(f1_score(te["y"], p, average="macro",
+                                                    zero_division=0)),
+                         "f1_unresolved": float(f1_score(te["y"], p, pos_label=1,
+                                                         zero_division=0))})
+            preds_all.append(te.assign(pred=p, context=ctx, margin=lp[:, 1] - lp[:, 0])
+                             [["item_id", "stratum", "split", "context", "y",
+                               "pred", "margin"]])
+            print(f"  {ctx} {split}: acc {rows[-1]['acc']:.3f} "
+                  f"macro-F1 {rows[-1]['macro_f1']:.3f}", flush=True)
+
+    r = pd.DataFrame(rows)
+    r.to_csv(os.path.join(OUT, "09c_llm_results.csv"), index=False)
+    if preds_all:
+        allp = pd.concat(preds_all, ignore_index=True)
+        allp.to_csv(os.path.join(OUT, "09c_llm_preds.csv"), index=False)
+        st = allp.groupby(["context", "stratum"]).apply(
+            lambda g: accuracy_score(g["y"], g["pred"]), include_groups=False)
+        st.rename("llm_acc").reset_index().to_csv(
+            os.path.join(OUT, "09c_llm_by_stratum.csv"), index=False)
+        print("\nby stratum:\n" + st.unstack().round(3).to_string())
+    if len(r):
+        print("\n" + r.pivot_table(index="context", columns="split",
+                                   values="macro_f1").round(3).to_string())
+
+
+if __name__ == "__main__":
+    main()
