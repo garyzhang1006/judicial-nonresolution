@@ -1,0 +1,21 @@
+\begin{figure*}[t]
+\centering\scriptsize
+\begin{verbatim}
+T01  need(?:s|ed)?\s+not\s+(?:\w+\s+){0,2}?decide\b
+T02  need(?:s|ed)?\s+not\s+(?:\w+\s+){0,2}?reach\b
+T03  \bdo(?:es)?\s+not\s+(?:\w+\s+){0,2}?decide\b
+T04  \bdo(?:es)?\s+not\s+(?:\w+\s+){0,2}?reach\b
+T05  declin(?:e|es|ed|ing)\s+to\s+(?:\w+\s+){0,2}?decide\b
+T06  declin(?:e|es|ed|ing)\s+to\s+(?:\w+\s+){0,2}?address\b
+T07  \bwithout\s+deciding\b
+T08  \bassuming\s+(?:\w+\s+){0,4}?without\s+deciding\b
+T09  assum(?:e|es|ed)\s+(?:\w+\s+){0,4}?without\s+deciding\b
+T10  express(?:es|ed|ing)?\s+no\s+(?:\w+\s+){0,2}?opinion\b
+T11  reserv(?:e|es|ed|ing)\s+(?:\w+\s+){0,3}?(?:question|questions|issue|issues|matter|judgme
+    nt|decision)\b|reserv(?:e|es|ed|ing)\s+(?:\w+\s+){0,3}?for\s+another\s+(?:day|case)\b
+T12  leav(?:e|es|ing)\s+(?:\w+\s+){0,4}?(?:for|to|until)\s+another\s+(?:day|case|occasion)\b
+T13  \b(?:not|un)\s*necessary\s+to\s+(?:decide|reach|resolve|address)\b
+\end{verbatim}
+\caption{The thirteen frozen expressions as regular expressions, matched case-insensitively over whitespace-normalized text.}
+\label{tab:regex}
+\end{figure*}

@@ -1,0 +1,33 @@
+\begin{table*}[t]
+\centering
+\begin{minipage}[t]{0.46\textwidth}
+\centering\small
+\begin{tabular}{lrr}
+\toprule
+split & $n$ & \% unresolved \\
+\midrule
+COURT & 54 & 57.4 \\
+DEV & 143 & 53.8 \\
+TEMPORAL & 44 & 54.5 \\
+TEST & 123 & 54.5 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Evaluation splits. They are disjoint at the opinion level and only \textsc{dev} was used for fitting.}
+\label{tab:splits}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\centering\small
+\begin{tabular}{lrr}
+\toprule
+stratum & $n$ & agreement with full context (\%) \\
+\midrule
+CTRL\_HOLD & 4 & 75.0 \\
+H1 & 11 & 81.8 \\
+H2 & 7 & 100.0 \\
+PLAIN & 9 & 100.0 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{How often the annotator's sentence-only label matches the label the same annotator gave with the full window. A within-annotator context ablation, not an inter-annotator statistic.}
+\label{tab:humanabl}
+\end{minipage}
+\end{table*}

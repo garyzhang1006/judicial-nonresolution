@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering\scriptsize
+\begin{tabular}{llrcr}
+\toprule
+split & context & $\Delta F_1$ & 95\% CI & $P(\Delta{>}0)$ \\
+\midrule
+TEST & W256 & -0.014 & [-0.110, +0.076] & 0.363 \\
+TEST & W1024 & -0.245 & [-0.365, -0.127] & 0.000 \\
+TEST & W4096 & -0.300 & [-0.421, -0.167] & 0.000 \\
+TEMPORAL & W256 & -0.139 & [-0.315, +0.017] & 0.033 \\
+TEMPORAL & W1024 & -0.171 & [-0.409, +0.048] & 0.057 \\
+TEMPORAL & W4096 & -0.236 & [-0.462, +0.026] & 0.037 \\
+COURT & W256 & -0.123 & [-0.299, +0.026] & 0.042 \\
+COURT & W1024 & -0.216 & [-0.387, -0.055] & 0.004 \\
+COURT & W4096 & -0.298 & [-0.482, -0.105] & 0.003 \\
+\bottomrule
+\end{tabular}
+\caption{Paired bootstrap on the effect of widening the context window, relative to the anchor sentence alone, for the sparse model. Resamples are paired across conditions.}
+\label{tab:context}
+\end{table}

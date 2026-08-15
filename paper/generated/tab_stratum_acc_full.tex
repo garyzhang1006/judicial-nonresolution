@@ -1,0 +1,31 @@
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{llrrr}
+\toprule
+stratum & context & $n$ & lexical & TF-IDF \\
+\midrule
+CTRL\_HOLD & SENT & 44 & 1.000 & 0.750 \\
+CTRL\_HOLD & W1024 & 44 & 1.000 & 0.318 \\
+CTRL\_HOLD & W256 & 44 & 1.000 & 0.545 \\
+CTRL\_HOLD & W4096 & 44 & 1.000 & 0.227 \\
+CTRL\_RAND & SENT & 9 & 1.000 & 0.222 \\
+CTRL\_RAND & W1024 & 9 & 1.000 & 0.556 \\
+CTRL\_RAND & W256 & 9 & 1.000 & 0.444 \\
+CTRL\_RAND & W4096 & 9 & 1.000 & 0.333 \\
+H1 & SENT & 38 & 0.895 & 0.947 \\
+H1 & W1024 & 38 & 0.895 & 0.816 \\
+H1 & W256 & 38 & 0.895 & 0.947 \\
+H1 & W4096 & 38 & 0.895 & 0.842 \\
+H2 & SENT & 43 & 0.907 & 0.907 \\
+H2 & W1024 & 43 & 0.907 & 0.814 \\
+H2 & W256 & 43 & 0.907 & 0.930 \\
+H2 & W4096 & 43 & 0.907 & 0.814 \\
+PLAIN & SENT & 52 & 0.942 & 0.962 \\
+PLAIN & W1024 & 52 & 0.942 & 0.885 \\
+PLAIN & W256 & 52 & 0.942 & 0.923 \\
+PLAIN & W4096 & 52 & 0.942 & 0.865 \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy by stratum and context width. The lexical rule is the frozen dictionary applied to the window.}
+\label{tab:stratacc}
+\end{table*}
