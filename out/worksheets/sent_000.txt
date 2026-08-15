@@ -1,0 +1,322 @@
+# ANCHOR SENTENCE ONLY. Label from this alone.
+# codes: D=decided  A=avoided  S=assumed  R=reserved  X=unclear
+
+### 0000 | PLAIN
+ISSUE: them, except for one point to be touched on later
+SENT: 1684, 6 L.Ed.2d 1081 (1961), in the view which we take of this case it is not necessary to decide them, except for one point to be touched on later.
+
+### 0001 | H1
+ISSUE: whether the issue, but, objecting to the court's resolu *365 tion of an issue not presented in the case before it, declined to join the majority opinion on this point. 515 U.S. at 437
+SENT: Justice O'Connor expressed no opinion on the issue, but, objecting to the court's resolu *365 tion of an issue not presented in the case before it, declined to join the majority opinion on this point. 515 U.S. at 437, 115 S.Ct. 2227 (O’Connor, J., concurring).
+
+### 0002 | H1
+ISSUE: whether a three year and twenty-three day delay in a complex conspiracy case is sufficient to pull the trigger
+SENT: we expressly decline to decide whether a three year and twenty-three day delay in a complex conspiracy case is sufficient to pull the trigger.
+
+### 0003 | CTRL_HOLD
+ISSUE: Congress was much more concerned with nonviolent economic coercion than with threats of physical violence
+SENT: Also, it is clear that Congress was much more concerned with nonviolent economic coercion than with threats of physical violence.
+
+### 0004 | CTRL_HOLD
+ISSUE: the jurisdictional in *756 firmities of the instant case sufficiently serious to mandate a different result
+SENT: 725 F.2d 29 (2d Cir.1984), but we find the jurisdictional in *756 firmities of the instant case sufficiently serious to mandate a different result.
+
+### 0005 | H1
+ISSUE: the appellants' additional arguments that the district court lacked jurisdiction to hold them in contempt, that the district court violated fundamental principles of separation of powers in appointing a special prosecutor to prosecute the c
+SENT: Since we reverse the district court's criminal and civil contempt orders for insufficiency of the evidence, we decline to address the appellants' additional arguments that the district court lacked jurisdiction to hold them in contempt, that the district court violated fundamental principles of separation of powers in appointing a special prosecutor to prosecute the criminal contempt charges, and that the district court's contempt orders violated the appellants' rights under the First Amendment.
+
+### 0006 | H1
+ISSUE: whether section 3731 authorizes federal appeals by prosecuting entities other than the United States
+SENT: 608 F.2d 1197, 1199 (9th Cir.1979), that section 3731 was “limited by its own terms to appeals by the United States as a prosecuting entity.” The Supreme Court declined to decide whether section 3731 authorizes federal appeals by prosecuting entities other than the United States.
+
+### 0007 | PLAIN
+ISSUE: whether the States, in the exercise of their “historic and essential authority to define the marital relation,” ante, at 18, may continue to utilize the traditional definition of marriage
+SENT: does not have before it, and the logic of its opinion does not decide, the distinct question whether the States, in the exercise of their “historic and essential authority to define the marital relation,” ante, at 18, may continue to utilize the traditional definition of marriage.
+
+### 0008 | H1
+ISSUE: whether the North Dakota courts would analyze the statute under the “close correspondence test or under the less exacting “rational basis” test, for we think the statutory classifications satisfy either test, and thus offend neither the sta
+SENT: We need not decide whether the North Dakota courts would analyze the statute under the “close correspondence test or under the less exacting “rational basis” test, for we think the statutory classifications satisfy either test, and thus offend neither the state nor the federal Constitution.
+
+### 0009 | H1
+ISSUE: whether a party would ever have to exhaust administrative remedies in order to bring a facial challenge to a regulatory scheme under the free speech clause of the First Amendment, we note that there is no administrative appeals process avai
+SENT: Without deciding whether a party would ever have to exhaust administrative remedies in order to bring a facial challenge to a regulatory scheme under the free speech clause of the First Amendment, we note that there is no administrative appeals process available to Chabad in this case. *433 The City provides an appeals process for the denial of a permit where the permit, seeker contends that its application meets the requirements of the City’s permitting scheme.
+
+### 0010 | H2
+ISSUE: the question and leave it to the district court to resolve in the first instance on remand, after giving the parties an opportunity to be heard. 12 Under the regulations implementing the WARN Acts, an "operating unit" exists "within a singl
+SENT: issue was not raised in the district court and has not been addressed on appeal, we do not reach the question and leave it to the district court to resolve in the first instance on remand, after giving the parties an opportunity to be heard. 12 Under the regulations implementing the WARN Acts, an "operating unit" exists "within a single site of employment." 54 Fed.
+
+### 0011 | H1
+ISSUE: whether the merits of Airframe's failed motion, and
+SENT: We express no opinion as to the merits of Airframe's failed motion, and we decide the present appeal based solely on the record before us.
+
+### 0012 | H2
+ISSUE: whether the detective’s error rendered the warrant invalid and the search unlawful. 5 Instead
+SENT: In any event, we need not decide finally whether the detective’s error rendered the warrant invalid and the search unlawful. 5 Instead, we hold that, assuming the warrant was invalid, the nature, effect, and cause of this particular type of assumed invalidity are such as to render the exclusionary rule inapplicable.
+
+### 0013 | H1
+ISSUE: whether all of those grand expectations were reasonable," , the Board found that the expectation that multipoint would have been within the scope of the contract was clearly reasonable
+SENT: Although the Board noted that it "need not decide ... whether all of those grand expectations were reasonable," id., the Board found that the expectation that multipoint would have been within the scope of the contract was clearly reasonable.
+
+### 0014 | PLAIN
+ISSUE: whether Global Equities II is a successor corporation to Global Equities
+SENT: Because we affirm the district court’s grant of summary judgment in favor of Global Equities II on other grounds, we decline to address whether Global Equities II is a successor corporation to Global Equities.
+
+### 0015 | H1
+ISSUE: whether there was an implied, derivative cause of action
+SENT: 1831, 1835-36, 60 L.Ed.2d 404 (1979), the existence of a private right of action under the Investment Company Act of 1940 was not disputed so the Court assumed without deciding that there was an implied, derivative cause of action.
+
+### 0016 | H1
+ISSUE: whether the merits of any of Burrell’s claims
+SENT: .We emphasize that we express no opinion about the merits of any of Burrell’s claims.
+
+### 0017 | H2
+ISSUE: whether this search was invalid under federal1 law
+SENT: Conceding, without deciding, that this search was invalid under federal1 law, we find no merit in this appeal, because the city officers, in making the search, were acting solely under state law.
+
+### 0018 | PLAIN
+ISSUE: whether or not challenges to the radio broadcasts of November 4 and 5 were timely raised by the Company, as it appears clear that the portions of those broadcasts concerning which the Company complains were either repetitions of some of the
+SENT: While we affirm the necessity of raising such timely objections with the Board, we need not here decide whether or not challenges to the radio broadcasts of November 4 and 5 were timely raised by the Company, as it appears clear that the portions of those broadcasts concerning which the Company complains were either repetitions of some of the matters contained in the Union handbill of November 2, or do not involve substantial departures from the truth. 13
+
+### 0019 | PLAIN
+ISSUE: for present purposes, it suffices to say that the two cases do not require courts to allow juries to second guess those decisions or decide them in the first instance
+SENT: on the question is a matter we need not decide; for present purposes, it suffices to say that the two cases do not require courts to allow juries to second guess those decisions or decide them in the first instance.
+
+### 0020 | H2
+ISSUE: whether Wittenburg established a prima facie case of both age and gender discrimination.8
+SENT: We, like the district court, assume without deciding that Wittenburg established a prima facie case of both age and gender discrimination.8
+
+### 0021 | PLAIN
+ISSUE: whether Childers waived his right to argue that the court’s decision was not an adjudication on the merits
+SENT: the merits,” we do not decide whether Childers waived his right to argue that the court’s decision was not an adjudication on the merits.
+
+### 0022 | CTRL_HOLD
+ISSUE: the district court’s ruling that Region VII is subject to suit under § 1983
+SENT: For the reasons discussed below, we AFFIRM the district court’s ruling that Region VII is subject to suit under § 1983.
+
+### 0023 | CTRL_HOLD
+ISSUE: in dismissing their complaint for want of standing under ERISA § 502(a)(2), which confers standing on plan participants to bring private causes of action to seek “appropriate relief’ under ERISA § 409
+SENT: Plaintiffs contend the district court erred in dismissing their complaint for want of standing under ERISA § 502(a)(2), which confers standing on plan participants to bring private causes of action to seek “appropriate relief’ under ERISA § 409.
+
+### 0024 | H2
+ISSUE: of the exemption, however, because the sale proceeds are not protected from a restitution order issued under the MVRA whether or not the exemption applies. [5
+SENT: [4] We need not explore the reach of the exemption, however, because the sale proceeds are not protected from a restitution order issued under the MVRA whether or not the exemption applies. [5]
+
+### 0025 | H2
+ISSUE: whether the propriety of even these statements when made by someone in White’s position, but they clearly fall within the intent of Rule 10b-5 when they are buttressed by purportedly factual assertions about the prospects of the company whi
+SENT: It may be one thing to say to a friend that a particular stock is a good speculation although we express no opinion on the propriety of even these statements when made by someone in White’s position, but they clearly fall within the intent of Rule 10b-5 when they are buttressed by purportedly factual assertions about the prospects of the company which are materially false and misleading in content or omission, to the extent that they are made with the assistance of interstate transportation and communication facilities or the mails.
+
+### 0026 | H1
+ISSUE: Whether those things amounted to invention, it is
+SENT: Whether those things amounted to invention, it is not necessary to decide.
+
+### 0027 | PLAIN
+ISSUE: whether, under 42 U.S.C. § 1988, a district court may award fees for an expert witness”); , 107 S.Ct. at 2500 (Marshall, J., dissenting) (“I do not understand today’s decision to decide the question whether a district court may award expert
+SENT: does not reach the question whether, under 42 U.S.C. § 1988, a district court may award fees for an expert witness”); id. at 446, 107 S.Ct. at 2500 (Marshall, J., dissenting) (“I do not understand today’s decision to decide the question whether a district court may award expert witness fees under 42 U.S.C. § 1988”).
+
+### 0028 | PLAIN
+ISSUE: whether the 3.0 hours per treatment standard qualifies as either an interpretative rule or a statement of policy because we believe it most clearly qualifies under the Medicare Act as a guideline of general applicability
+SENT: In the end, however, we need not decide whether the 3.0 hours per treatment standard qualifies as either an interpretative rule or a statement of policy because we believe it most clearly qualifies under the Medicare Act as a guideline of general applicability.
+
+### 0029 | H2
+ISSUE: whether the merits of Leavitt’s *72 reasonable accommodation claim or of the arguments made in the cross-motions for summary judgment
+SENT: We express no opinion on the merits of Leavitt’s *72 reasonable accommodation claim or of the arguments made in the cross-motions for summary judgment.
+
+### 0030 | H1
+ISSUE: issue conceded at oral argument
+SENT: 1 (5th Cir.2010) (declining to address issue conceded at oral argument).
+
+### 0031 | PLAIN
+ISSUE: what amount of force is reasonable when an officer is aware that an arrestee is particularly susceptible to injury; however, we have no choice but to conclude that the force was reasonable where an officer causes no injuries in the course o
+SENT: We need not decide what amount of force is reasonable when an officer is aware that an arrestee is particularly susceptible to injury; however, we have no choice but to conclude that the force was reasonable where an officer causes no injuries in the course of effecting a lawful arrest, despite the fact that the arrestee is particularly susceptible to injury. 6
+
+### 0032 | PLAIN
+ISSUE: whether the Alien Tort Statute creates a cause of action be *682 cause it clearly does not confer jurisdiction over a foreign sovereign
+SENT: We need not decide whether the Alien Tort Statute creates a cause of action be *682 cause it clearly does not confer jurisdiction over a foreign sovereign.
+
+### 0033 | CTRL_RAND
+ISSUE: an infringing appropriation, and seems to me relevant here only as showing that a reversal of the rotational elements was not an obvious equivalent of Karnofsky
+SENT: The presence of improvements does not necessarily avoid the question of an infringing appropriation, and seems to me relevant here only as showing that a reversal of the rotational elements was not an obvious equivalent of Karnofsky.
+
+### 0034 | CTRL_HOLD
+ISSUE: whether petitioners are subject to the authority of the FLRA when acting in their capacities as supervisors of dual-status technicians
+SENT: We conclude that petitioners are subject to the authority of the FLRA when acting in their capacities as supervisors of dual-status technicians.
+
+### 0035 | H1
+ISSUE: whether the stipulation required the district court to award the full $7,500 fee amount to Mrs
+SENT: Because of our resolution of this issue, we need not decide whether the stipulation required the district court to award the full $7,500 fee amount to Mrs.
+
+### 0036 | H2
+ISSUE: whether when such a post-arrest duty arises and how much investigation is necessary to meet that duty
+SENT: However, we leave for another day the question of when such a post-arrest duty arises and how much investigation is necessary to meet that duty.
+
+### 0037 | CTRL_HOLD
+ISSUE: whether the search in question did not require reasonable suspicion
+SENT: We hold that the search in question did not require reasonable suspicion.
+
+### 0038 | CTRL_HOLD
+ISSUE: whether the withheld documents were not material to the question whether Cone committed murder with the requisite mental state, the lower courts failed to adequately consider whether that same evidence was material to Cone’s sentence
+SENT: While we agree that the withheld documents were not material to the question whether Cone committed murder with the requisite mental state, the lower courts failed to adequately consider whether that same evidence was material to Cone’s sentence.
+
+### 0039 | CTRL_HOLD
+ISSUE: whether California inmates continue to have a liberty interest in parole after In re Dannenberg, 34 Cal.4th 1061, 23 Cal.Rptr.3d 417, 104 P.3d 783 (2005
+SENT: We hold that California inmates continue to have a liberty interest in parole after In re Dannenberg, 34 Cal.4th 1061, 23 Cal.Rptr.3d 417, 104 P.3d 783 (2005).
+
+### 0040 | CTRL_RAND
+ISSUE: whether the victim is choking, and whether mouth-to-mouth resuscitation is required
+SENT: In the interactive display input described in the '685 patent, rescue personnel select certain "characteristics of the victim relevant to proper performance of CPR techniques." These characteristics include factors such as the consciousness of the victim, whether adult or child or infant, whether the victim is choking, and whether mouth-to-mouth resuscitation is required.
+
+### 0041 | CTRL_RAND
+ISSUE: t]he weight of the evidence against petitioner
+SENT: Court of Georgia evaluated whether “[t]he weight of the evidence against petitioner
+
+### 0042 | H1
+ISSUE: whether the deference that courts owe to fee scales negotiated by a properly-selected lead plaintiff would mandate deference to that plaintiffs decision to employ a rising-percentage fee scale in a particular case
+SENT: We need not decide at this time whether the deference that courts owe to fee scales negotiated by a properly-selected lead plaintiff would mandate deference to that plaintiffs decision to employ a rising-percentage fee scale in a particular case.
+
+### 0043 | H1
+ISSUE: whether latter analysis
+SENT: In view of our agreement with its findings of literal infringement, we need not reach that latter analysis.
+
+### 0044 | PLAIN
+ISSUE: whether any of these challenges for the reasons that follow
+SENT: We decline to address the merits of any of these challenges for the reasons that follow.
+
+### 0045 | H2
+ISSUE: whether inter partes review procedures apply retroactively to patents that were filed before Congress enacted the America Invents Act ("AIA
+SENT: was a printed publication and because VirnetX did not preserve the only remaining issue of whether inter partes review procedures apply retroactively to patents that were filed before Congress enacted the America Invents Act ("AIA"), we affirm.
+
+### 0046 | CTRL_HOLD
+ISSUE: whether despite the requirement of convic- tion under a particular statute, this modifying phrase indicates that rel- evant conduct should be considered in determining whether the appropriate base offense level is six
+SENT: § 2A6.1(a)(2), we determine that, despite the requirement of convic- tion under a particular statute, this modifying phrase indicates that rel- evant conduct should be considered in determining whether the appropriate base offense level is six.
+
+### 0047 | CTRL_RAND
+ISSUE: a prisoner has exhausted administrative remedies is a mixed question of law and fact
+SENT: Whether a prisoner has exhausted administrative remedies is a mixed question of law and fact.
+
+### 0048 | H1
+ISSUE: whether the appealability of a denial of qualified immunity when the plaintiff's action involves claims for injunctive relief that will have to be adjudicated regardless of the resolution of any damage claims
+SENT: Forsyth specifically noted that it was expressing no opinion regarding the appealability of a denial of qualified immunity when the plaintiff's action involves claims for injunctive relief that will have to be adjudicated regardless of the resolution of any damage claims.
+
+### 0049 | CTRL_HOLD
+ISSUE: whether Bucio-Cabrales has failed to show that he was entitled to a Franks hearing
+SENT: Accordingly, we conclude that Bucio-Cabrales has failed to show that he was entitled to a Franks hearing.
+
+### 0050 | H2
+ISSUE: Patterson's insufficiency-of-the-evidence claim in our prior opinion, we deviated from a practice that has been (and remains) the law in this circuit and most others for the better part of the last 25 years
+SENT: In sum, when we declined to address Patterson's insufficiency-of-the-evidence claim in our prior opinion, we deviated from a practice that has been (and remains) the law in this circuit and most others for the better part of the last 25 years.
+
+### 0051 | H1
+ISSUE: whether the decision in Apotex estopped GSK from claiming otherwise
+SENT: Having determined that “even if GSK is not precluded from asserting the privilege [for attorney work, product], it has failed to satisfy its burden of showing the applicability of the doctrine to the relevant documents,” the district court found it unnecessary to resolve whether the decision in Apotex estopped GSK from claiming otherwise.
+
+### 0052 | H2
+ISSUE: whether the district court paid sufficient deference to the SRO’s decision
+SENT: Because we remand the case for further consideration of a putative error seemingly committed by both the SRO and the district court, we need not decide whether the district court paid sufficient deference to the SRO’s decision.
+
+### 0053 | H2
+ISSUE: whether Arroyo-Benitez properly waived his right to have a grand jury amend the indictment, however, because Arroyo-Benitez at a minimum forfeited his Fifth Amendment claim by failing to object to the amended indictment, and so must show pl
+SENT: We need not here decide whether Arroyo-Benitez properly waived his right to have a grand jury amend the indictment, however, because Arroyo-Benitez at a minimum forfeited his Fifth Amendment claim by failing to object to the amended indictment, and so must show plain error, which he fails to do.
+
+### 0054 | H1
+ISSUE: one of the IJ’s alternative bases for denying relief, we review the IJ’s decision as modified by the BIA
+SENT: Where, as here, the BIA affirms the IJ’s decision but rejects or does not reach one of the IJ’s alternative bases for denying relief, we review the IJ’s decision as modified by the BIA.
+
+### 0055 | H1
+ISSUE: whether the affidavit would have been *37 admissible at trial, the Court notes that the affidavit appears to have been executed under somewhat questionable circumstances
+SENT: Though the Court does not reach the question of whether the affidavit would have been *37 admissible at trial, the Court notes that the affidavit appears to have been executed under somewhat questionable circumstances.
+
+### 0056 | PLAIN
+ISSUE: whether substantial evidence might compel a finding of persecution on account of a protect ground, even in the absence of any direct evidence
+SENT: Because we conclude that the motive requirement for asylum eligibility is satisfied in this case solely on the basis of the evidence that the Guatemalan military persecuted Chanchavac on account of imputed political support for the guerrillas, we do not reach the question whether substantial evidence might compel a finding of persecution on account of a protect ground, even in the absence of any direct evidence.
+
+### 0057 | CTRL_HOLD
+ISSUE: whether the “proceeding” continues after the EPA issues a Section 2603(a)(2) test order
+SENT: at the text’s plain meaning and the Congress’ intent, we find that the “proceeding” continues after the EPA issues a Section 2603(a)(2) test order.
+
+### 0058 | H2
+ISSUE: of creditor liability, that claim, along with the claim of assignee liability, was necessarily submitted for judgment on the facts as they were then established
+SENT: The Bank argues that, by not explicitly reserving the issue of creditor liability, that claim, along with the claim of assignee liability, was necessarily submitted for judgment on the facts as they were then established.
+
+### 0059 | PLAIN
+ISSUE: whether he may proceed directly under § 1981
+SENT: we express no opinion on that issue, and we turn to whether he may proceed directly under § 1981.
+
+### 0060 | CTRL_HOLD
+ISSUE: Cox’s sentence and remand to the District Court for (1) further fact-finding concerning the precise circumstances surrounding Cox’s guilty plea to the 1999 state drug charges, including the role of counsel in advising him to do so, and the 
+SENT: For the reasons that follow, we vacate Cox’s sentence and remand to the District Court for (1) further fact-finding concerning the precise circumstances surrounding Cox’s guilty plea to the 1999 state drug charges, including the role of counsel in advising him to do so, and the subsequent dismissal of that conviction by the state court, and (2) resentencing in light of those facts.
+
+### 0061 | PLAIN
+ISSUE: whether its refusal to delay trial also constituted a constitutional violation
+SENT: evidence, we do not decide whether its refusal to delay trial also constituted a constitutional violation.
+
+### 0062 | CTRL_HOLD
+ISSUE: the procedural challenges to the Water Master’s ruling, but conclude that the district court adopted an incorrect legal standard for evaluating a petition to reclassify project land
+SENT: We reject the procedural challenges to the Water Master’s ruling, but conclude that the district court adopted an incorrect legal standard for evaluating a petition to reclassify project land.
+
+### 0063 | PLAIN
+ISSUE: appellant’s arguments concerning the deference to be given agencies in the absence of statutory requirements, or the issue of abuse of discretion
+SENT: Because we agree with the CIT that the statute, informed and supported by the legislative history and purpose, requires verification in periodic reviews, we do not reach appellant’s arguments concerning the deference to be given agencies in the absence of statutory requirements, or the issue of abuse of discretion.
+
+### 0064 | H2
+ISSUE: whether subject matter jurisdiction dispositive
+SENT: Finding the issue of subject matter jurisdiction dispositive, we do not reach Mr.
+
+### 0065 | CTRL_HOLD
+ISSUE: whether the allocation of a payment in this manner would permit the creditor to collect an amount otherwise disallowed as post-petition interest
+SENT: Because we find that the allocation of a payment in this manner would permit the creditor to collect an amount otherwise disallowed as post-petition interest, we reverse the judgment of the district court which permitted collection of the additional amount.
+
+### 0066 | CTRL_RAND
+ISSUE: the secured party subjectively intends or understands the effect
+SENT: of whether the secured party subjectively intends or understands the effect of
+
+### 0067 | H1
+ISSUE: in compliance with Rule 30 of the Federal Rules of Criminal Procedure, 18 U.S.C.A
+SENT: Additionally, we find it sufficient to note that the appellant has failed to preserve this issue in compliance with Rule 30 of the Federal Rules of Criminal Procedure, 18 U.S.C.A.
+
+### 0068 | CTRL_RAND
+ISSUE: improper argument renders a trial so unfair as to amount to a denial of due process, United States v
+SENT: whether improper argument renders a trial so unfair as to amount to a denial of due process, see United States v.
+
+### 0069 | CTRL_RAND
+ISSUE: whether result is intended or even foreseeable, and no matter how long the chain of causality between modification and injury
+SENT: Any “significant habitat modification” that in fact produces that result by “impairing essential behavioral patterns” is made unlawful, regardless of whether that result is intended or even foreseeable, and no matter how long the chain of causality between modification and injury.
+
+### 0070 | H1
+ISSUE: the degree of negligence, if any at all, that must be attributable to "any person or persons [who] ... alter, deface, destroy, move, injure, ... or in any manner whatever impair the usefulness of ..." any improvement made by the United Stat
+SENT: Accordingly, this en banc court does not consider or decide the degree of negligence, if any at all, that must be attributable to "any person or persons [who] ... alter, deface, destroy, move, injure, ... or in any manner whatever impair the usefulness of ..." any improvement made by the United States to any of its navigable waters in violation of Secs. 408 and 412 before invoking the strict liability of these sections
+
+### 0071 | PLAIN
+ISSUE: what effect Woodford has on Hemphill 's holding that where administrative procedures are confusing "a reasonable interpretation of prison grievance regulations may justify an inmate's failure to follow procedural rules to the letter." Hemph
+SENT: [1] For this reason, we need not decide what effect Woodford has on Hemphill 's holding that where administrative procedures are confusing "a reasonable interpretation of prison grievance regulations may justify an inmate's failure to follow procedural rules to the letter." Hemphill, 380 F.3d at 690 (citing Giano ).
+
+### 0072 | H1
+ISSUE: whether Levi Strauss also had two factors acquired distinctiveness and degree of recognitionthat weighed in its favor
+SENT: The district court assumed, without deciding, that Levi Strauss also had two factors acquired distinctiveness and degree of recognitionthat weighed in its favor.
+
+### 0073 | CTRL_HOLD
+ISSUE: whether they are covered by Federal’s policy, and
+SENT: Because we conclude that the nurses’ actions were dishonest, as well as negligent, we hold that they are covered by Federal’s policy, and we reverse the District Court’s holding to the contrary.
+
+### 0074 | PLAIN
+ISSUE: Officer Bruce's arguments regarding the exclusion of certain evidence or Richmond's arguments on the reduction of nominal damages or a new trial on actual damages
+SENT: Accordingly, we do not reach Officer Bruce's arguments regarding the exclusion of certain evidence or Richmond's arguments on the reduction of nominal damages or a new trial on actual damages.
+
+### 0075 | H2
+ISSUE: whether the two Sang Goo Park exceptions apply to a self-certification denial as well, they nonetheless would not permit us to review Abdulla’s self-certification claim
+SENT: If we assume (without deciding) that the two Sang Goo Park exceptions apply to a self-certification denial as well, they nonetheless would not permit us to review Abdulla’s self-certification claim.
+
+### 0076 | H2
+ISSUE: whether the government was bound by, or should have been granted leave to comply with, the representative capacity requirement
+SENT: We need not decide whether the government was bound by, or should have been granted leave to comply with, the representative capacity requirement.
+
+### 0077 | H1
+ISSUE: these cases, then what does? The constitutional text is assuredly as susceptible of one meaning as of the other; in that circumstance, what constitutes a "law abridging the freedom of speech" is either a matter of history or else it is a ma
+SENT: If that long and unbroken tradition of our people does not decide these cases, then what does? The constitutional text is assuredly as susceptible of one meaning as of the other; in that circumstance, what constitutes a "law abridging the freedom of speech" is either a matter of history or else it is a matter of opinion.
+
+### 0078 | H2
+ISSUE: whether the board's decision to retain billions of dollars in unallocated surplus funds, rather than allocate those funds to the USAA savings accounts of individual subscribers, should be accorded business judgment deference
+SENT: Because we hold that True has failed to allege that the board violated any legal obligation owed to individual subscribers, we do not reach the question of whether the board's decision to retain billions of dollars in unallocated surplus funds, rather than allocate those funds to the USAA savings accounts of individual subscribers, should be accorded business judgment deference.
+
+### 0079 | PLAIN
+ISSUE: California Smoothie's claims: that the proof that California Smoothie falsely represented that it had acquired expertise in selecting profitable locations for franchises and that it had utilized that expertise in selecting the Pompano mall 
+SENT: In light of our decision, however, we need not reach California Smoothie's claims: that the proof that California Smoothie falsely represented that it had acquired expertise in selecting profitable locations for franchises and that it had utilized that expertise in selecting the Pompano mall site did not establish a violation of the Consumer Fraud Act; that the evidence did not support the jury's finding that California Smoothie represented to Baugher and Rossetti that "they could expect gross sales of $250,000 and likely in excess of $300,000"; and that the court erred under New Jersey law in admitting parol evidence of one of the three misrepresentations allegedly made by California Smoothie.
