@@ -1,0 +1,55 @@
+The pilot ran on a preliminary frame built from a leading portion of the bulk
+opinion table, before the full pass was committed to. Its purpose was to find
+out whether the guideline could be applied at all, whether the controls behaved,
+and which strata were worth sampling heavily. Sixty items were annotated. Pilot
+items are not part of the benchmark and no pilot label appears in any result.
+
+\subsection{What the pilot showed} Labels fell out by stratum as follows:
+\textsc{ctrl\_hold} 12 \textsc{decided} and 0 \textsc{unresolved};
+\textsc{plain} 19 \textsc{unresolved} and 1 \textsc{decided};
+H2 8 \textsc{unresolved} and 2 \textsc{decided};
+H1 5 \textsc{unresolved}, 5 \textsc{decided}, and 5 \textsc{unclear}.
+
+Three things follow. The holding-cue control behaves as intended and is not
+contaminated. The \textsc{plain} stratum is nearly degenerate: a trigger with no
+structural complication almost always does mean the court left the issue open,
+which is why a keyword rule scores as well as it does and why that score means
+little. The H1 stratum is close to an even split, so it is where the task
+actually lives, and the sample was reallocated toward it. This reallocation
+changes only how many items are drawn per stratum. Label definitions and stratum
+definitions were fixed before the pilot and held throughout.
+
+\subsection{The one protocol revision} Version 1.0 of the guideline had no rule
+for a passage whose only trigger sits inside a parenthetical or a description of
+another court's work, on a question the present opinion never reaches in its own
+right. A citation noting that the Supreme Court declined to decide whether an
+airport user fee was excessive tells you nothing about the disposition of the
+Federal Circuit opinion that cites it, and forcing a choice between
+\textsc{decided} and \textsc{unresolved} would have manufactured a label. Rule
+L1-9 routes these to \textsc{unclear}. It uses an existing label; it adds none.
+This is the single revision the design permits, it was made once, before any
+main-sample annotation, and the changelog is reproduced in
+Appendix~\ref{app:guide}.
+
+\subsection{Three pipeline defects the pilot exposed} These concern candidate
+construction, not the guideline. The pattern flagging a trigger as plausibly
+describing another institution was case-sensitive, matching ``the district
+court'' but missing ``the District Court,'' which appellate opinions write about
+as often; it now also recognizes ``the court held'' and its near neighbours. The
+annotator was shown a later holding sentence only for items already flagged H2,
+though Rule L1-3 turns on precisely that passage, so an H1 item whose opinion
+later resolved the issue was unanswerable rather than hard; the sentence is now
+shown whenever one exists outside the displayed window. And ``our holding'' was
+a control locator, but in the pilot it pointed at a named prior case rather than
+the present disposition every time it fired, so it was dropped.
+
+\subsection{What the pilot did not do} It was not used to adjust any label
+boundary. The trigger dictionary was frozen before the pilot and is unchanged;
+in particular, the pilot surfaced two recurring dictionary false positives, and
+neither was patched. One is the statutory-scope reading of \emph{reach}, as in
+``the shipment clause does not reach shipments between the continental States,''
+which is a holding about a statute rather than a non-resolution. The other is a
+line-break artefact in the source text that splits \emph{preserving} into
+\texttt{P} and \texttt{reserving}, which then matches T11. Both stay in, are
+labelled \textsc{decided} by the guideline, and are counted against the
+dictionary in \S\ref{sec:models}.

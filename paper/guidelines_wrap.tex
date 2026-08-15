@@ -1,0 +1,153 @@
+\begin{quote}\scriptsize\begin{verbatim}
+TASK. You are given a legal issue and a passage from
+  a United States federal
+appellate opinion. Decide whether the opinion
+  resolved that issue.
+
+LABELS.
+  DECIDED     The authoring court resolved the
+    issue. It stated a holding, a
+              conclusion, or a
+                determination on the
+                issue, whether or not
+                that
+              resolution was necessary
+                to the judgment, and
+                whether or not it
+              was later characterized
+                as dictum.
+  UNRESOLVED  The authoring court did not resolve
+    the issue for itself.
+
+If and only if the label is UNRESOLVED, assign one
+  sublabel.
+  AVOIDED     The court declined to reach the
+    issue because some other ground
+              disposed of the case or
+                the claim. Typical
+                form: "because we
+              affirm on qualified
+                immunity grounds, we
+                need not decide
+                whether
+              the search was lawful."
+  ASSUMED     The court proceeded on a stated
+    assumption about the issue and
+              resolved the case on
+                other grounds, so that
+                the assumption did
+              no independent work.
+                Typical form:
+                "assuming without
+                deciding
+              that the statute reaches
+                this conduct, the
+                evidence is
+              insufficient."
+  RESERVED    The court expressly held the issue
+    open for future resolution,
+              signalling that it
+                remains available.
+                Typical form: "we
+                leave for
+              another day whether
+                Chevron survives in
+                this context."
+
+DECISION RULES.
+  L1-1  ATTRIBUTION. The label describes what THIS
+    opinion did. Language about
+        what a different court did, whether
+          a lower court, a sister circuit,
+          or
+        the Supreme Court, does not by
+          itself make this opinion's
+          disposition
+        UNRESOLVED. "The district court
+          concluded it need not decide X"
+          tells
+        you about the district court. Read
+          on to see what this court did.
+  L1-2  UNIT. In a cluster containing a majority
+    opinion and separate opinions,
+        each opinion is its own unit. A
+          dissent that would decide an issue
+          the
+        majority avoided is DECIDED for the
+          dissent and UNRESOLVED for the
+        majority.
+  L1-3  LATER RESOLUTION CONTROLS. A court may
+    write "we need not decide X" and
+        then decide X anyway, in the same
+          opinion, in an alternative
+          holding, in
+        a footnote, or in a later section.
+          Where the opinion does resolve the
+        issue somewhere, the label is
+          DECIDED. A court's
+          characterization of
+        what it need not do controls only
+          where no independent resolution
+        follows.
+  L1-4  ASSUMPTION THAT DOES WORK. If the court
+    assumes a proposition and the
+        assumption is then treated as
+          settled for the remainder of the
+          analysis
+        in a way that determines the
+          outcome, the label remains
+          UNRESOLVED and
+        the sublabel is ASSUMED. Assuming a
+          proposition is not deciding it,
+          even
+        when the assumption drives the
+          result.
+  L1-5  NO TRIGGER REQUIRED. UNRESOLVED does not
+    require any particular phrase.
+        A court can leave an issue open in
+          ordinary prose.
+  L1-6  PARTIAL RESOLUTION. The unit is the
+    proposition named in the issue
+        statement, not the broader legal
+          question it belongs to. If the
+          court
+        resolves the anchored proposition
+          but leaves a neighbouring one
+          open,
+        the label is DECIDED. If the court
+          resolves a neighbouring
+          proposition
+        but leaves the anchored one open,
+          the label is UNRESOLVED.
+  L1-7  REMANDS. An issue remanded for the
+    district court to address in the
+        first instance is UNRESOLVED,
+          sublabel AVOIDED, unless the
+          appellate
+        court also states the governing rule
+          and applies it.
+  L1-8  ABSTAIN. If the passage is too corrupt,
+    too truncated, or too ambiguous
+        to support either label, output
+          UNCLEAR rather than guessing.
+  L1-9  ISSUES THIS OPINION NEVER TAKES UP.
+    Sometimes the only reason an issue
+        is in front of you is that the
+          opinion mentioned, in a
+          parenthetical or
+        in a description of some other
+          court's work, that a different
+          court did
+        not decide it, and this opinion
+          never reaches the issue in its own
+        right. That is neither DECIDED nor
+          UNRESOLVED for this opinion.
+          Output
+        UNCLEAR. This rule does not apply
+          where the opinion goes on to
+          engage
+        with the issue itself: there, L1-1
+          and L1-3 govern.
+\end{verbatim}\end{quote}
+
+\noindent Version 1.1. The single permitted revision after the pilot, and the layer-two and issue-statement guidelines, are in the released package.

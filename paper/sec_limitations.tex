@@ -1,0 +1,90 @@
+\subsection*{Who produced the labels} A single annotator applied the frozen
+guideline, so the labels carry no inter-annotator agreement statistic. A blind
+second pass over already-labelled items, shown in a different order with the
+first-pass labels withheld, reproduced them exactly (27 of 27, $\kappa=1.00$). We
+report the figure and rest little on it, since perfect self-agreement is as
+consistent with an annotator recognising passages seen earlier as with a
+guideline that admits one reading. The quantity we do rest on is the
+within-annotator context ablation (\S\ref{sec:models}), which measures how far
+the same annotator's decisions depend on material outside the anchor sentence.
+Whether two trained lawyers would agree on these labels is a question for a
+follow-up study with a practitioner panel.
+
+The annotator is a language model, which places it in the same family as some of
+the systems under evaluation. Two design choices contain the circularity. The
+supervised baselines are trained from the labels but are architecturally
+independent of the label source, and they carry the context-scaling result. The
+zero-shot baseline is a small open model that had no part in producing the
+labels, saw no guideline, and was scored by label-token likelihood, so it is
+independent of them. A frontier model evaluated against its own annotations would
+report agreement with itself, so we omit that comparison. The escalation results
+in \S\ref{sec:long} rest on the same labels.
+
+\subsection*{Benchmark and split sizes} Annotation produced \NBench{} usable
+labels, \NDev{} for development and 104, 36, and 46 for the three held-out
+conditions. At that size, differences of a few macro-$F_1$ points sit inside the
+noise, and the temporal condition carries wide intervals. The two comparisons we
+rest on are the per-stratum contrast, where the gap between the sparse model and
+the dictionary on H1 is large, and the paired context comparison, which is
+within-item and therefore better powered than the split sizes suggest. One fact a
+reader should weigh is that the separation between supervised systems and the
+dictionary emerged as the development split grew, having been absent at half this
+annotation scale. That is the signature of an effect that needed data to surface,
+and it is also a reason to rerun the benchmark at several thousand items.
+
+The leakage control reaches \IssueOnlyF{} macro-$F_1$ against a majority baseline
+of 0.392, with intervals that barely overlap. Every dictionary expression and
+holding cue is stripped from a statement before it is kept, so the signal here is
+subject matter rather than lexical leakage of the label. Which questions courts
+decline to reach is correlated with what the questions are about, so part of what
+a system appears to infer from the passage is available from the topic alone.
+Future versions of this benchmark should either match strata on subject matter or
+report the issue-only control alongside every headline number, as we do here.
+
+\subsection*{What the dictionary measures} A court can leave an issue open in
+ordinary prose. Freezing the thirteen expressions before annotation protects
+against tuning them to a result, and the recall audit in Appendix
+\ref{app:recall} bounds what they miss by reading a random sample of opinions
+containing none of them. Prevalence figures should be read as the rate of
+explicitly marked non-resolution. The item frame is scoped the same way. It
+admits anchors with a recoverable issue statement, and yield varies across
+expressions and, less strongly, across courts, so the benchmark samples anchors
+with a recoverable proposition. Appendix \ref{app:issue} reports yield by
+stratum so the direction of the loss is visible.
+
+\subsection*{Corpus coverage} CourtListener is broad but uneven. Coverage,
+metadata completeness, and text quality vary by court and era, and the same
+opinion is sometimes stored more than once from different upstream sources. We
+deduplicate and report the eligibility funnel, and a change in measured
+prevalence across periods remains partly a change in what was digitized and how.
+This is why period-stratified rates appear throughout rather than a single time
+series presented as a trend in judicial behaviour.
+
+A citing passage is treated as being about the origin's issue when its content
+words overlap the issue statement. That admits false positives, where a later
+opinion cites the origin for a neighbouring point sharing vocabulary, and false
+negatives, where a later court restates the issue in different words. Annotation
+removes the false positives, since off-issue passages are labelled and dropped,
+and the false-negative rate is unmeasured.
+
+\subsection*{Scope of the comparison} The comparison between unresolved and
+decided issues matches on court, period, opinion length, and citation volume, and
+is descriptive. Whether an issue was left open is a judicial choice correlated
+with unobservables, including how hard and how contested the issue was, and those
+plausibly affect how later courts describe it. We report the contrast as an
+association.
+
+Chains require the origin to carry a reporter citation locatable in the citing
+text, and are restricted to citing opinions inside the population, so district
+and state court treatments fall outside the sample and origins in the most recent
+years have had little time to accumulate citations. Both restrictions bias the
+chain sample toward older, better-reported, more-cited opinions.
+
+The encoder baselines truncate at 512 tokens and the zero-shot model at 1600,
+which caps the widest context condition, so the comparison across context widths
+is partly a comparison of how much of the window each architecture uses. The
+zero-shot model has 3.8B parameters, and its role here is to show that an
+independent model responds to the context manipulation in the same direction. The
+study covers English-language United States federal appellate opinions, and
+extension to state courts, trial courts, agency adjudication, or other legal
+systems remains future work.

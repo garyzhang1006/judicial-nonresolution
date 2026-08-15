@@ -1,0 +1,51 @@
+\subsection{Locating a citing passage} An opinion that left an issue open is
+usually cited for something else, so a case-level edge is not evidence that a
+later court said anything about the issue. For each origin we take its reporter
+citations from the bulk citation table, build a pattern of the form
+\emph{volume reporter page}, and search the text of each citing opinion for it.
+Edges where no citation string can be located in the citing text are dropped
+rather than guessed at; the count of such drops is reported. Around the located
+citation we take a window of $\pm900$ characters, which is the citing passage.
+
+\subsection{Deciding whether a passage is about the issue} A passage is treated
+as issue-specific when at least three content words of the origin's issue
+statement appear in it, after stopword removal. This is a filter on what gets
+annotated, not a label. Annotators mark passages that are in fact about
+something else \textsc{off\_issue}, and those are dropped, so false positives are
+removed by annotation. False negatives are not recoverable: a later court that
+restates the issue in different words will not be found. The rate of those is
+unknown and is stated as a limitation.
+
+\subsection{Capping per origin} At most three citing passages are drawn per
+origin. Without a cap, a handful of heavily cited opinions would supply most of
+the sample, and the clustered bootstrap would rest on a few very large clusters.
+
+\subsection{The matched decided control} The comparison group is annotated
+\textsc{decided} issues, drawn from the same benchmark and put through the same
+chain construction. This is what separates status escalation from generic
+citation compression. If later courts simply describe all prior holdings in
+stronger and simpler terms than the originals warrant, both groups will show it.
+The claim of interest requires escalation to be higher for issues the origin left
+open, after matching on originating court, period, opinion length, and citation
+volume.
+
+\subsection{Inference} Several citing passages can share an origin, so passages
+are not independent. All intervals for layer-two quantities are percentile
+bootstrap resampling origins rather than passages, which is the level at which
+the design clusters. We report descriptive contrasts with those intervals and
+fit no causal model: whether a court leaves an issue open is a choice correlated
+with how hard and how contested the issue is, and those same features plausibly
+drive how later courts describe it.
+
+\subsection{Directions through the citation network} Chains are not restricted to
+the originating circuit. For each origin we record whether the citing opinion is
+from the same court, another court of appeals, or the Supreme Court. These are
+reported as descriptive pathways rather than as separate hypotheses.
+
+\subsection{Blinding} The layer-two worksheet shows the origin's own passage and
+never its label. An annotator told in advance that the origin left the issue open
+would be judging the later court's language against a primed expectation, and the
+central contrast in \S\ref{sec:long} is exactly between unresolved and decided
+origins. Withholding the label costs nothing, since the origin passage carries
+whatever information the judgement needs, and it removes the most obvious route
+by which the contrast could be manufactured.

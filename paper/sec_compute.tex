@@ -1,0 +1,37 @@
+Bulk processing and the non-LLM stages run on one laptop with ten cores and
+17\,GB of memory. The replacement zero-shot evaluation runs on one
+\LLMDevice{} with \LLMDtype{} weights; scoring all twelve context-by-split
+cells takes \LLMMinutes{} minutes after model loading.
+
+\subsection{Bulk processing} The five bulk tables total roughly 62\,GB
+compressed. The opinion table alone is 54.6\,GB and expands 7.0-fold to about
+384\,GB, which is never written to disk: decompression is delegated to a
+subprocess so it overlaps with parsing, and a single streaming pass filters to
+the population, strips markup, matches the dictionary, and writes sharded text
+with a byte-offset index. Decompression sustains about 71\,MB/s and CSV parsing
+about 70\,MB/s, so the pass is bounded by their pipeline rather than by anything
+downstream, and completes in \PassMinutes{} minutes. Later stages seek into the
+shards by offset and never reread the bulk file. Two gates keep the pass cheap.
+The population test is applied to the raw row before any markup is stripped, so
+rows outside the fourteen courts cost only CSV tokenization, and a substring
+check precedes the regular expression union, so the union is run only on
+documents that could match.
+
+\subsection{Models} The sparse baselines train in seconds and the encoders
+fine-tune on the Apple Silicon Metal backend in a few minutes per context
+condition. The zero-shot replacement is the only model evaluated on the
+\LLMDevice{}; its larger weights do not fit the laptop setup used for the other
+stages.
+
+\subsection{Network} The CourtListener REST API is used only for the independent
+cross-check in Appendix \ref{app:api}, which issues roughly three hundred count
+queries. Nothing in the main pipeline depends on per-record API access, which is
+the point of working from the bulk release: the citation graph in particular
+would otherwise require one request per edge.
+
+\subsection{Released artefacts} We release the frozen dictionary with its SHA-1,
+the eligibility funnel, the item frame, the benchmark with splits and labels, the
+issue-specific chains, all model predictions, and the pipeline. The benchmark is
+distributed as opinion identifiers with character offsets into the normalized
+text, together with the normalization code, so that upstream corrections and
+removals propagate.

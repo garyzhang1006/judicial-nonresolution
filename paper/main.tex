@@ -1,0 +1,354 @@
+\documentclass[11pt]{article}
+\usepackage[review]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+
+\input{generated/macros}
+
+\title{Need Not Decide: A Benchmark for Judicial Non-Resolution\\
+in U.S. Federal Appellate Opinions}
+
+\author{Author Name \\
+  Affiliation \\
+  \texttt{email@domain}}
+
+% Subsection headings replace the run-in bold paragraph headings; the default
+% vertical space around them is generous for a two-column layout, so it is
+% tightened rather than dropping content to stay inside the page limit.
+\usepackage{capt-of}
+% Allow more than one full-width float at the top of a page, so the
+% supplementary tables do not flush onto a page of their own.
+\setcounter{dbltopnumber}{4}
+\renewcommand{\dbltopfraction}{.92}
+\renewcommand{\dblfloatpagefraction}{.7}
+\setcounter{topnumber}{3}
+\renewcommand{\topfraction}{.9}
+\renewcommand{\textfraction}{.06}
+\usepackage{titlesec}
+\titlespacing*{\subsection}{0pt}{4pt plus 1pt minus 1pt}{1pt}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{0.6em}{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Deciding less than it could is one of the ways an appellate court exercises
+authority, and courts announce it in a small vocabulary that has been stable for
+a century. We ask whether language models can tell an issue a court resolved
+from one it discussed and left open, and what becomes of an unresolved issue as
+later courts cite it. A frozen
+thirteen-expression dictionary applied to \NEligible{} federal appellate
+opinions from the CourtListener bulk release finds explicit non-resolution
+language in
+\Prevalence{}. From that population we draw a stratified benchmark of \NBench{}
+annotated issues, pairing trigger-bearing passages with matched issues from
+trigger-free opinions and with two adversarial strata where the trigger is
+present but misleading. The dictionary scores well pooled, but that score is an
+artefact of anchor-centred sampling. Per
+stratum the systems separate: supervised models beat the dictionary on the
+stratum built to defeat it, and a fine-tuned encoder beats it outright on the
+court-held-out condition. Context helps to about $\pm256$ characters and then
+hurts. We release \NCharTight{} judicially authored characterizations of prior
+decisions and use them to hand-verify cases
+where a later court calls a declined question a holding, which bears on how
+citation counts are read as evidence of what an opinion settled. The dictionary,
+benchmark, and pipeline are released.
+\end{abstract}
+
+\section{Introduction}
+
+Courts are unusual among institutions in that their output is a written account
+of their own reasoning, so what they decline to do is recorded in the same
+medium as what they do. A United States appellate court that has raised a legal
+question is not obliged to answer it. It may resolve the case on a narrower ground and say that it
+``need not decide'' the question. It may assume an answer ``without deciding''
+and show that the outcome is the same either way. It may state that the question
+is left ``for another day.'' These moves are ordinary, and they are marked in
+prose by a small vocabulary that has been stable for a century.
+
+Declining to decide is a choice about how much law to make. It is the working
+form of the norm that a court should rule no more broadly than the case
+requires, and it is one of the few exercises of judicial discretion that leaves
+a direct textual trace instead of having to be inferred from votes or outcomes.
+
+The practice matters for two reasons that pull in different directions. For
+courts, declining to decide is a discipline, the means by which a court keeps its
+holdings narrow and leaves a question open for a better-argued case. For anyone
+who later reads the opinion, it is a trap. An opinion that assumed a proposition
+without deciding it reads, at the level of the sentence, like an
+opinion that held it. The distinction lives in the surrounding paragraphs, and
+sometimes in a footnote several pages away.
+
+That combination makes judicial issue disposition a natural test for language
+technology. The label depends on discourse structure rather than lexical content,
+the surface cue is easy to find and easy to misread, and there is an external
+record of what happened next. This paper builds a task around it and uses the
+task to ask an institutional question.
+
+\subsection{Two layers} We separate a classification problem from the phenomenon
+it lets us study. For an issue $q$ appearing in opinion $o$, layer one asks for
+\begin{equation}
+D(q,o) \in \{\textsc{decided}, \textsc{unresolved}\},
+\end{equation}
+with \textsc{unresolved} refined into \textsc{avoided}, \textsc{assumed}, and
+\textsc{reserved}. The primary benchmark is deliberately binary. Layer two takes
+an issue $q$ that opinion $o_0$ left unresolved, follows the chain
+$o_0 \rightarrow o_1 \rightarrow o_2 \rightarrow \cdots$ of later opinions that
+cite $o_0$ in a discussion of $q$, and asks what decisional status each later
+opinion ascribes to $o_0$ on that issue.
+
+\subsection{Population, benchmark, and chains} We treat these as three
+populations rather than one. Prevalence is estimated over every eligible
+opinion, with natural frequencies preserved. The benchmark is a stratified
+sample that deliberately oversamples the informative minority. The longitudinal
+analysis is restricted to issues whose originating opinions have had time to be
+cited. Keeping them separate means no single statistical question is forced onto
+a sample chosen for a different purpose.
+
+\subsection{Contributions}
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item A population-scale measurement of explicit judicial non-resolution across
+\NFedApp{} federal appellate opinions, the Supreme Court and all thirteen courts
+of appeals, with the eligibility funnel reported in full (\S\ref{sec:corpus},
+\S\ref{sec:prev}).
+\item A benchmark of \NBench{} annotated issues whose negative class is not the
+absence of a phrase. Trigger-bearing passages are paired with matched issues from
+opinions containing no dictionary expression and with two adversarial strata
+built so the dictionary is actively misleading (\S\ref{sec:bench}).
+\item An evaluation with four held-out conditions showing that the dictionary's
+pooled score is a property of the sampling, that supervised systems beat it on
+the adversarial stratum and on court-held-out generalization, and that context
+past a few hundred characters degrades every system family. A within-annotator
+ablation shows the same shape for a human (\S\ref{sec:models}).
+\item A released set of \NCharTight{} judicially authored characterizations of
+prior decisions, and a hand-verified case series in which \NIMEsc{} of
+\NIMDistinct{} propositions a court declined to decide are later described as
+that court's holding (\S\ref{sec:long}).
+\item A released package containing the dictionary and its hash, the guideline
+with its one recorded revision, the benchmark with splits and stratum labels, the
+citation chains, and the pipeline that rebuilds all of it.
+\end{enumerate}
+
+\section{Related Work}
+
+\subsection{Legal benchmarks and resources} Legal NLP has moved toward suites
+assembled with practitioner input, of which \textsc{LegalBench}
+\citep{guha2023legalbench} is the clearest example, alongside resources targeting
+specific reasoning steps or document types \citep{zheng2021casehold,
+chalkidis2022lexglue, hendrycks2021cuad} and recent workshop resources spanning
+jurisdictions \citep{xie2024clcuket, jang2025pilot}. Our task differs in what
+supplies the label. CaseHOLD asks which holding belongs to a citation. We ask
+whether a passage states a holding at all, a question with no answer at the level
+of the citing sentence.
+
+\subsection{Precedent treatment and citators} The closest existing task is
+classifying how a later case treats an earlier one, the problem commercial
+citators address with editorial teams and colour-coded flags.
+\citet{demir2025validate} benchmark language models on multi-label precedent
+treatment over expert-annotated citations. That work asks whether a case is still
+good law, taking as given that the case decided something. We ask the prior
+question, which no citator records. A case can carry a clean flag while the
+proposition later opinions attribute to it is one the court expressly declined to
+decide. Treatment classification takes the case as its unit and we take the
+issue, so the two signals are close to orthogonal.
+
+\subsection{Context, stability, and what models use} Several recent
+results argue that apparent legal competence is sensitive to how evidence is
+positioned and how the question is posed. \citet{xia2025haystack} show that
+long-context recall on court opinions depends on surrounding material rather than
+on raw retrieval, \citet{purushothama2025bench} find legal interpretation
+judgments unstable against human judgments, \citet{held2025formal} report that
+extracting formal argument structure remains hard, and
+\citet{blairstanek2024blt} show that even basic operations over legal text are
+unreliable. Two choices follow. We vary the context window rather than fixing it,
+because the evidence that settles our label is often paragraphs from the cue, and
+we report accuracy per stratum rather than pooled, because a pooled number over a
+constructed benchmark reports the construction. Domain pretraining
+\citep{chalkidis2020legalbert} and large open corpora \citep{henderson2022pile}
+have made appellate text a standard substrate, and CourtListener \citep{cl}
+supplies the bulk release we use. Work on citation networks in law has largely
+operated at the case level \citep{fowler2007network, black2013citation}. We build
+chains at the level of an individual issue.
+
+\subsection{Hedging, uncertainty, and factuality} Detecting hedged assertions has
+a long history in scientific and biomedical text \citep{farkas2010conll,
+vincze2008bioscope}, and event factuality annotation formalizes the graded
+commitment a text makes to a proposition \citep{sauri2009factbank,
+rudinger2018neural}. Judicial non-resolution is a domain-specific instance whose
+commitment is institutionally consequential and is contested by later readers
+whose characterizations we observe. Related in spirit, \citet{hou2024gaps}
+distinguish gaps from hallucinations in generated legal analysis.
+
+\subsection{Avoidance in legal scholarship} Legal scholarship has long studied
+constitutional avoidance and the narrowness of holdings, generally through close
+reading of small numbers of prominent cases. We do not adjudicate that
+literature. We supply the measurement layer it lacks, namely how often the
+practice occurs across an entire appellate system and what becomes of the issues
+it leaves behind.
+
+\section{Task Definition}
+\label{sec:task}
+
+\subsection{Items} An item is a triple $(o, a, q)$, an opinion $o$, an anchor
+span $a$ locating a passage inside it, and a neutral statement $q$ of the
+proposition that passage is about. Issue statements are generated from the text
+around the anchor and constrained to be uninformative about the answer. Any
+dictionary expression or holding cue appearing in a candidate statement is cut
+before the statement is kept, so no issue statement contains one. Appendix
+\ref{app:issue} gives the extraction procedure and its yield.
+
+\subsection{Layer one} The annotator sees $q$ and a passage from $o$ and assigns
+$D(q,o)$. \textsc{decided} means the authoring court resolved the issue, whether
+or not the resolution was necessary to the judgment. \textsc{unresolved} means it
+did not resolve the issue for itself. Three rules do most of the work.
+The label describes what \emph{this} opinion did, so a sentence reporting that
+the district court thought it need not decide something says nothing about this
+court. In a cluster with separate opinions each opinion is its own item, and a
+dissent that would decide an avoided issue is \textsc{decided}. A court may
+write that it need not decide an issue and then decide it anyway, in an
+alternative holding or a footnote, and where it does the label is
+\textsc{decided}. The full guideline is Appendix
+\ref{app:guide}.
+
+\subsection{Layer two} Given an issue $q$ in origin $o_0$ and a passage in a
+later opinion $o_1$ that cites $o_0$, the annotator assigns a status level
+\begin{center}
+\begin{tabular}{ll}
+$L_0$ & explicitly unresolved \\
+$L_1$ & assumed or conditional \\
+$L_2$ & supported or probable \\
+$L_3$ & treated as established \\
+\end{tabular}
+\end{center}
+and two independent binary flags. $A=1$ when $o_1$ attributes a resolution of $q$
+to $o_0$. $E=1$ when $o_1$ resolves $q$ itself, on its own analysis.
+
+The distinction between $A$ and $E$ is the analytical core of layer two. If
+\emph{Smith} said it need not decide $X$ and \emph{Jones} says ``the issue
+remains open, but we now hold $X$,'' that is doctrinal development rather than error, and
+$A=0$, $E=1$. If \emph{Jones} says ``\emph{Smith} held $X$,'' that is
+attributional escalation, recorded as $A=1$. We use the term \emph{precedential status
+escalation} for $\mathrm{Status}_{\text{later}}(q) > \mathrm{Status}_{\text{origin}}(q)$
+and reserve any stronger word for cases the annotation establishes to be
+inconsistent with the origin.
+
+\section{Corpus and Population}
+\label{sec:corpus}
+
+\subsection{Source} We use the CourtListener bulk release of 30 June 2026: the
+opinion, opinion-cluster and docket tables, the citation map, and the
+reporter-citation table. The export escapes embedded quotation marks with a
+backslash rather than by doubling them, so parsing with the CSV default
+desynchronizes the reader on roughly two thirds of cluster rows. We note this
+because the failure is invisible in the resulting file. All processing is a
+single streaming pass on one laptop.
+
+\subsection{Population} The population is every opinion issued by one of fourteen
+courts, the Supreme Court and the thirteen courts of appeals. CourtListener holds
+other federal appellate bodies, among them the historical circuit courts, the
+Court of Customs and Patent Appeals, and several agency review boards. These are
+outside the population and Appendix \ref{app:courts} lists every excluded court.
+Because the cluster table carries a docket key but no court, the docket table is
+the only route from an opinion to its issuing court.
+
+\subsection{Eligibility} Criteria are applied in a fixed order and each one's
+cost is shown in Figure \ref{fig:funnel}. We require a parseable filing date in
+$[1789, 2026]$ and at least one thousand characters of extractable text, which
+removes one-line orders, judgment entries, and the volume of Supreme Court
+orders-list records. We further require that the record not be blocked from
+public view, and we deduplicate, since the same opinion is often ingested from
+more than one upstream source.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\columnwidth]{generated/fig_funnel.pdf}
+\caption{Eligibility funnel. Each bar is the count surviving one criterion, applied in the order shown; the thousand-character minimum is the largest single reduction.}
+\label{fig:funnel}
+\end{figure}
+
+\subsection{Text} Opinions are stored in several markup flavours. We take the
+first non-empty field in a fixed precedence order and strip markup, recording
+which field supplied the text so that source composition can be reported by
+period. Appendix \ref{app:text} gives the precedence and the composition.
+
+\section{Measuring Non-Resolution at Population Scale}
+\label{sec:prev}
+
+\subsection{The frozen dictionary} Candidate generation uses thirteen
+expressions, fixed before annotation and unchanged afterwards, listed in Table
+\ref{fig:trigger}. Its SHA-1 is \texttt{\DictSHA}. Patterns tolerate a few
+intervening words, so ``need not now decide'' is captured alongside the bare
+form. One expression is operationalized rather than matched literally. The design
+names the stem \emph{reserve}, which in appellate prose is dominated by senses
+unrelated to non-resolution, so the pattern requires it to govern a word denoting
+a legal question or a deferral.
+
+\subsection{Lexical prevalence is candidate generation, not the measurement} A
+count of opinions containing these expressions is not an estimate of judicial
+avoidance. It is an upper bound on one observable form of it, inflated by
+passages describing other courts and deflated by courts that leave issues open in
+ordinary prose. We report it because it fixes the sampling frame and because it
+is a population census rather than a sample. For a stratum of $N$ eligible
+opinions of which $k$ contain at least one expression we report
+\begin{equation}
+\hat{\pi}=k/N \quad\text{with}\quad
+\hat{\pi}^{\,w}=\frac{k+z^{2}/2}{N+z^{2}},
+\end{equation}
+the Wilson centre \citep{wilson1927probable}, giving an interval even though the
+population is enumerated, because the expression is a noisy proxy for the
+practice rather than a sample from it. \S\ref{sec:models} and Appendix
+\ref{app:recall} quantify both errors.
+
+\subsection{Analysis hierarchy, fixed in advance} A corpus this size supports a
+great many regressions, so the order of questions was fixed before the benchmark
+was drawn. Three primary results: whether models separate \textsc{decided} from
+\textsc{unresolved}, whether wider context helps, and what fraction of
+unresolved issues are later ascribed greater decisional force. Five secondary
+questions were pre-specified, covering court level, era, opinion type,
+precedential status, and citation volume. Everything else is exploratory and
+labelled as such.
+
+\input{sec_results}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{sec_conclusion}
+
+% Content ends here. Everything below begins on the next page, so the
+% eight-page content limit is enforced by the document rather than by eye.
+\clearpage
+
+\section*{Limitations}
+
+\input{sec_limitations}
+
+\section*{Ethics Statement}
+
+The corpus consists of published judicial opinions, which are public records, and
+we add no information about any individual beyond what those opinions already
+contain. Opinions name parties, including criminal defendants, immigration
+petitioners, and civil litigants. We release passage offsets and opinion
+identifiers rather than redistributing text, so that removals and corrections
+upstream propagate. The task is descriptive. A system that classifies issue
+disposition should not be used to characterize a court's work without review, and
+the escalation analysis measures how propositions are described in later
+opinions, not whether any court erred. We name no judge in any reported result.
+
+\bibliography{refs}
+\bibliographystyle{acl_natbib}
+
+\appendix
+\input{appendix}
+
+\end{document}

@@ -1,0 +1,70 @@
+\subsection{Context conditions} Every system is evaluated under four windows
+around the anchor: the anchor's sentence (\textsc{sent}), and $\pm256$,
+$\pm1024$, and $\pm4096$ characters. Windows are cut from the normalized text and
+whitespace-collapsed. The sentence condition isolates local lexical evidence; the
+widest condition is the only one that routinely reaches a later holding sentence
+in the same opinion, which is what the H2 stratum requires.
+
+\subsection{Lexical rule} The floor. The frozen dictionary is applied to the
+context window and the item is predicted \textsc{unresolved} when any expression
+matches. This is not a strawman: it is exactly the procedure that generated the
+candidates, and it is what a keyword system would do. Because controls are drawn
+from opinions containing no dictionary expression anywhere, the rule is close to
+perfect on the \textsc{ctrl} strata by construction, and its overall number is
+therefore an optimistic reading of what phrase matching achieves. The strata that
+matter are H1 and H2, where the rule is wrong whenever the annotation says the
+court's actual disposition runs against the phrase.
+
+\subsection{Sparse baseline} TF-IDF over word unigrams and bigrams, minimum
+document frequency two, at most 60{,}000 features, sublinear term frequency,
+followed by $\ell_2$-regularized logistic regression with $C=4$ and balanced
+class weights. Trained on \textsc{dev} only.
+
+\subsection{Encoders} LEGAL-BERT \citep{chalkidis2020legalbert} and
+DistilRoBERTa, fine-tuned for five epochs at learning rate $2\times10^{-5}$,
+batch size 16, maximum length 512 tokens, with the issue statement as the first
+segment and the context window as the second, truncating only the context.
+Class weights are inverse to \textsc{dev} frequency. The 512-token cap means the
+$\pm4096$ condition is truncated for these models, so their context curve
+understates what a long-context architecture could use; this is stated in the
+Limitations.
+
+\subsection{Leakage control} A classifier trained on the issue statement alone,
+with no context at all. Issue statements are constructed to be neutral and any
+dictionary expression or holding cue is cut from them, so this classifier should
+sit near the majority-class baseline. It is the check on how much of the
+benchmark is answerable from the phrasing of the issue alone.
+
+\subsection{Uncertainty} Macro-$F_1$ intervals are percentile bootstrap over
+2{,}000 resamples of the evaluation set. Each item comes from a distinct opinion,
+so resampling items and resampling opinions coincide here; the clustered
+bootstrap is needed only in \S\ref{sec:long}, where several citing passages can
+share an origin.
+
+\subsection{Splits} The four evaluation conditions are disjoint and nested in a
+fixed order. Every item from the two reserved courts forms \textsc{court}. Of
+what remains, every item filed in \TemporalCut{} or later forms
+\textsc{temporal}. The remainder is split at random into \textsc{test} and
+\textsc{dev}, and \textsc{dev} is the only portion any system was fit on. The
+hard-negative subset is not a split: it cuts across all of them, and is reported
+as a breakdown.
+
+\input{tab_stratum_acc_wrap}
+
+\subsection{Zero-shot language model}
+\LLMName{} (revision \texttt{\LLMRevision}) runs on one \LLMDevice{} with
+unquantized \LLMDtype{} weights. Logits are cast to float32 before scoring.
+Nothing is generated: for each item we form one prompt and compare the summed
+log-probability of the continuation
+\texttt{ DECIDED} against \texttt{ UNRESOLVED}. Scoring rather than generating
+removes refusals, verbose answers needing parsing, and format drift that varies
+with prompt length, all of which would otherwise be confounded with difficulty.
+Prompts truncate to 1600 tokens, which binds only in the widest condition. The
+prompt is fixed across conditions and reads, in full: a one-line framing that the
+passage is from a United States federal appellate opinion, the issue, the
+passage, and the question whether the court resolved that issue or left it
+unresolved, answerable in one word. No few-shot examples are supplied and the
+annotation guideline is not shown, so the model sees strictly less than the
+annotator did.
+
+\input{tab_llmstratum_wrap}

@@ -1,0 +1,181 @@
+\section{Excluded Federal Courts}
+\label{app:courts}
+CourtListener assigns federal jurisdiction codes to many bodies beyond the
+fourteen courts in the population. Every excluded court is listed in the released
+artefact \texttt{01\_courts.json}. They fall into four groups: the historical
+circuit courts that sat before the Judiciary Act of 1891, appearing under roughly
+130 identifiers of the form \texttt{circt*}; abolished or specialized Article I
+and Article III courts, among them the Court of Customs and Patent Appeals, the
+Court of Claims, and the Court of International Trade; the Foreign Intelligence
+Surveillance Court and its Court of Review; and administrative review bodies
+whose decisions are published alongside judicial opinions, among them the Board
+of Immigration Appeals, the Merit Systems Protection Board, and the Patent Trial
+and Appeal Board.
+
+Excluding administrative bodies is a substantive choice. Agency adjudicators use
+the same vocabulary of non-resolution, but they are not courts of appeals, their
+decisions carry different precedential force, and the citation practices layer
+two depends on differ. The historical circuit courts are excluded for a different
+reason: their reporting is uneven and their text largely OCR-derived, so a rate
+computed over them would measure digitization as much as judicial practice.
+
+\section{Text Extraction}
+\label{app:text}
+
+CourtListener stores an opinion's text in whichever markup flavours its upstream
+sources supplied. We take the first field with usable content in the order
+\texttt{html\_columbia}, \texttt{html\_lawbox}, \texttt{xml\_harvard},
+\texttt{html\_anon\_2020}, \texttt{html}, \texttt{plain\_text},
+\texttt{html\_with\_citations}. The citation-annotated variant is last because it
+injects anchor text into the body. Markup is removed by closing block-level tags
+into newlines, deleting remaining tags, unescaping entities, and normalizing
+whitespace; character offsets in the released benchmark refer to this normalized
+text. Table \ref{tab:textsrc} reports which field supplied the text, by period.
+Source composition shifts with period because different digitization projects
+covered different eras, which is one reason we report period-stratified rates
+rather than a single pooled trend.
+
+\input{tab_textsrc_wrap}
+
+\section{The Frozen Trigger Dictionary}
+\label{app:dict}
+
+Figure \ref{fig:trigger} lists the thirteen expressions with
+their corpus frequencies. The regular expressions themselves are reproduced
+below; they were fixed before annotation and their SHA-1 is \texttt{\DictSHA}.
+
+\input{tab_regex_wrap}
+
+T08 and T09 are proper subsets of T07 by construction. They are retained because
+the design names them separately, and a passage matching several expressions is
+counted once in opinion-level rates while keeping every identifier. T11 is the
+only expression not matched as written, for the reason given in
+\S\ref{sec:prev}.
+
+\section{Issue Statement Extraction}
+\label{app:issue}
+
+An item needs a statement of the proposition at stake that does not reveal the
+answer. We derive it from the sentence containing the anchor rather than from a
+fixed character budget, which stops the clause running into whatever the court
+said next.
+
+The procedure takes the material following the anchor within the anchor's
+sentence, deletes reporter citations and signals, and looks for a
+\emph{whether}-complement within the first sixty characters. If none is present
+but the clause opens with a complementizer or a preposition taking a
+propositional object, it is rewritten as a \emph{whether}-clause. If it opens
+with neither, it is kept as a noun phrase, but only when its first token is not a
+verb, negation, conjunction, or pronoun, since those signal a fragment rather
+than a statement of an issue. Where the trigger closes its own sentence, the
+material before the anchor is used instead, and only when that material itself
+names the issue with \emph{whether}, \emph{the question of}, or \emph{the issue
+of}. Two filters run last. Any dictionary expression or holding cue in the
+candidate statement is cut, which is what allows the claim that no issue
+statement contains one, and statements with fewer than three content words, or
+more than forty percent non-alphabetic, are rejected as extraction debris.
+
+Rejection is not random. An anchor with no extractable issue statement does not
+enter the frame, so the benchmark is a sample of anchors with a recoverable
+proposition rather than of all anchors. Table \ref{tab:extract} reports the yield
+by expression and by court so that the direction of any bias is visible.
+
+\input{tab_extract_wrap}
+
+\section{Annotation Guidelines}
+\label{app:guide}
+
+The guidelines below are reproduced verbatim from the frozen protocol. Version
+1.0 was drafted before the pilot; version 1.1 incorporates the single revision
+the design permits, made once after the pilot and before any main-sample
+annotation.
+
+\input{guidelines_wrap}
+
+\section{Pilot Study and Protocol Revision}
+\label{app:pilot}
+
+\input{sec_pilot}
+
+\section{Dictionary Recall Audit}
+\label{app:recall}
+
+The frozen dictionary bounds what candidate generation can find. It says nothing
+about non-resolution expressed in language outside it. To bound that, we drew a
+random sample of eligible opinions containing no dictionary expression and read
+them for issues the court discussed and left unresolved.
+
+\input{sec_recall}
+
+
+\section{Full Prevalence Tables}
+\label{app:prev}
+
+\input{tab_prev_extra_wrap}
+
+\begin{figure}[t]
+\centering
+\IfFileExists{generated/fig_heat.pdf}{\includegraphics[width=\columnwidth]{generated/fig_heat.pdf}}{}
+\caption{Share of eligible opinions containing at least one frozen dictionary
+expression, by court and period. Cells with fewer than 150 eligible opinions are
+left blank rather than plotted as noise.}
+\label{fig:heat}
+\end{figure}
+
+\section{Cross-Check Against the Search Index}
+\label{app:api}
+
+The bulk release and the public CourtListener search index are built from the
+same database but refreshed on different schedules and tokenized differently.
+Querying the index for the thirteen literal phrases, restricted to the fourteen
+courts, gives an estimate of how many opinions contain each expression that is
+independent of our text extraction, markup handling, and field precedence.
+
+\input{sec_api}
+
+\section{Supplementary Tables}
+\label{app:supp}
+\input{tab_context_wrap}
+\input{tab_prev_period_wrap}
+\input{tab_paths_wrap}
+\IfFileExists{generated/tab_tailpair_full.tex}{\input{generated/tab_tailpair_full}}{\input{tab_splits_wrap}\input{tab_humanabl_wrap}}
+
+These are collected rather than placed inline because each is a secondary cut on
+a quantity already reported.
+
+\section{Model Details}
+\label{app:models}
+
+\input{sec_models_app}
+
+\section{Judicial Characterizations and Layer Two}
+\label{app:layer2}
+\label{app:judicial}
+\input{sec_judicial}
+
+\section{Error Analysis}
+\label{app:errors}
+\input{sec_errors}
+
+\section{Secondary Prevalence Cuts}
+Opinion type and precedential
+status were named as secondary analyses before the corpus was built. Majority and
+lead opinions carry the expressions at \PrevMajority{} against \PrevSeparate{}
+for concurrences and dissents, and published opinions run at \PrevPub{} against
+\PrevUnpub{} for unpublished dispositions. Appendix \ref{app:prev} gives both
+tables. Neither cut is offered as an explanation, and both are confounded with
+opinion length and with which courts publish what.
+
+\section{Sublabel Distribution}
+Within \textsc{unresolved}, the sublabels split \ShareAvoided{}
+\textsc{avoided}, \ShareAssumed{} \textsc{assumed}, and \ShareReserved{}
+\textsc{reserved}. The imbalance is itself informative. Courts most often decline
+to reach an issue because something else disposes of the case, the narrow-grounds
+discipline; expressly holding a question open for a future case is much rarer,
+and assuming a proposition to show it does not matter sits in between.
+
+
+\section{Reproduction and Compute}
+\label{app:compute}
+
+\input{sec_compute}

@@ -1,0 +1,59 @@
+One annotator produced the study's labels. This appendix reports a check built
+from a source no annotator touched, and the citation machinery behind
+\S\ref{sec:long}.
+
+\subsection{Judges label each other's opinions}
+When a court writes ``\emph{Smith}, 123 F.3d 456, 460 (declining to decide
+whether the statute applies),'' it asserts on the record that \emph{Smith} did
+not resolve that question; ``(holding that \dots)'' asserts the opposite. We
+scanned all \NEligible{} eligible opinions for reporter citations and applied a
+frozen two-class characterization dictionary to a window around each.
+\NCharLoose{} passages matched, but the loose form is unreliable: a marker near a
+citation is often about something else, as where ``it did not reach a verdict''
+refers to a jury. Requiring the verb to bind directly to the citation, as a
+parenthetical or appositive, leaves \NCharTight{} passages, \NCharLZero{} of them
+assertions of non-resolution, over \NCharOps{} cited opinions. We release this
+set.
+
+\subsection{Why it cannot validate the annotations}
+The obvious use fails. Suppose a later court says \emph{Smith} held $X$ and our
+annotation says \emph{Smith} left $X$ open. Two explanations fit: our label is
+wrong, or the later court has overstated \emph{Smith}, which is the phenomenon
+this paper measures. Nothing in the disagreement distinguishes them. We report
+this because the design is tempting and the flaw shows only once the numbers are
+in front of you.
+
+\subsection{Proximity matching and why it failed}
+Pairing each characterization with the sentence in the cited opinion sharing the
+most content words gives \NJudgeBench{} items (\NJudgeUnres{} unresolved,
+\NJudgeDec{} decided), but systems transfer poorly: the frozen dictionary reaches
+\JudgeLexF{} macro-$F_1$ against 0.946 on the annotated benchmark. The cause is
+measurable and is not the labels. Among items a judge called unresolved, only
+8.2\% carry a dictionary expression in the selected anchor sentence, against
+0.5\% of items a judge called decided: enriched sixteenfold, so the labels carry
+signal, but in more than nine cases in ten the matcher selects where the opinion
+\emph{discusses} the issue rather than where it \emph{disposes} of it. Accuracy
+rises monotonically with match quality, from 0.485 to 0.610, the pattern
+anchoring noise predicts and label noise does not. Asking instead whether a
+dictionary expression sits within 400 characters of the characterized passage
+covers \NEscN{} characterizations, of which \NProxyGood{} of \NProxyCheck{}
+hand-checked flags were genuine. Both failures are the same failure, and it is
+why \S\ref{sec:long} matches propositions.
+
+\subsection{Chains, matching, and inference}
+Absolute rates in \S\ref{sec:long} are not prevalence estimates, since the
+characterization set is dominated by holding-ascriptions by construction, so only
+contrasts are interpretable. The origin-side reading is high precision and low
+recall, so the comparison runs between origins that \emph{visibly} mark an issue
+open and the rest. Intervals resample originating opinions rather than passages,
+since several citing passages share an origin. We fit no causal model: whether a
+court leaves an issue open is a choice correlated with unobservables, including
+how contested the question was, and those plausibly affect how later courts
+describe it.
+
+Locating where an opinion disposes of a named proposition, rather than where it
+discusses one, is the binding constraint on a population rate. At the measured
+yields, estimating one to within a few points needs on the order of a thousand
+verified propositions, which at one in ten means annotating close to ten thousand
+citing passages: an annotation budget an order of magnitude larger than a single
+annotator supplies.

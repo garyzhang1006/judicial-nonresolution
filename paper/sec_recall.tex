@@ -1,0 +1,42 @@
+Reading whole opinions at random is a weak audit. A non-resolution can sit
+anywhere in forty pages, most opinions contain none, and an annotator who has
+internalized the dictionary is primed to see the vocabulary it already
+covers.
+
+We use a second, deliberately wider probe list instead. Fifteen expressions
+outside the frozen dictionary were written after the fact and run over a random
+sample of \RecallSampled{} opinions the dictionary called clean. The probe is
+confined to this audit and enters neither candidate generation, the benchmark,
+nor any prevalence figure.
+
+\RecallHit{} of clean opinions contain at least one probe expression. Table
+\ref{tab:recall} gives the breakdown. What that figure bounds needs stating
+carefully. It is a measure of \emph{lexical} coverage, not of missed
+non-resolution. Some probe hits are genuine, as in a Seventh Circuit opinion
+that writes ``Volkswagen does not raise this argument and we do not resolve
+it,'' and then says the question ``remains unsettled.'' Others are the same
+statutory-scope reading of \emph{reach} and \emph{address} that already
+contaminates the frozen dictionary, where the court is saying what a statute
+covers rather than what it declined to decide. Annotating a sample of probe hits would be needed to convert the probe rate
+into an estimate of missed non-resolution, so we report it as a coverage
+figure.
+
+The largest omission is the \emph{address}, \emph{consider}, \emph{resolve}
+family. The frozen dictionary contains \emph{need not decide} and \emph{need not
+reach} but not \emph{need not address}, and \emph{decline to address} but not
+\emph{decline to consider}. The design named thirteen expressions and they were
+frozen before annotation, so the gap stands rather than being patched. The pilot
+had already flagged one instance, in a control opinion reading ``we need not
+address the government's contention'' that was nonetheless admitted to the
+zero-trigger pool.
+
+Two consequences follow for how the paper's numbers should be read. Population
+prevalence in \S\ref{sec:prev} measures explicitly marked non-resolution using
+one fixed vocabulary, and a wider vocabulary would find more, so it is a floor
+rather than an estimate of the phenomenon. And the control pool is contaminated
+in a known direction, since some opinions admitted as trigger-free do contain
+unresolved issues expressed in language outside the dictionary. That
+contamination makes the controls harder rather than easier, so it works against
+every reported separation rather than for it.
+
+\input{tab_recall_wrap}

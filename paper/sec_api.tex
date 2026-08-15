@@ -1,0 +1,24 @@
+Three hundred count queries were issued against the v4 search endpoint: a
+denominator for each of the fourteen courts, a denominator for each court and
+period, and a count for each of the thirteen literal phrases, both per court and
+pooled. No opinion text was retrieved.
+
+Two differences from the bulk pipeline are expected and neither is a defect.
+The index counts opinions as the search system stores them, while our
+denominator counts opinions surviving the eligibility criteria of
+\S\ref{sec:corpus}, which remove short orders and duplicates; the index
+denominator is therefore the larger of the two. And the index matches literal
+phrases, while the frozen dictionary tolerates a few intervening words and
+constrains T11, so the two counts are not measuring the same event. The
+comparison is useful precisely because the two disagree in known directions: a
+large unexplained gap would indicate that markup handling or field precedence
+was losing text, and a close match on the shape of the distribution across
+courts and expressions indicates that it is not.
+
+The pooled index count over the thirteen literal phrases restricted to the
+fourteen courts is 108{,}669 opinions against a denominator of
+\ApiTotal{} indexed opinions, an implied rate of 7.8\%. Ranking the expressions
+by frequency, the index and the bulk corpus agree on the ordering of the top
+group, with \emph{need not decide} first in both.
+
+\input{tab_api_wrap}
