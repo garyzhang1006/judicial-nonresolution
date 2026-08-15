@@ -1,0 +1,6 @@
+{
+ "n_checked": 17,
+ "n_genuine": 2,
+ "precision": 0.11764705882352941,
+ "note": "manual check of origin_marks_open=True cases; 15 of 17 had a trigger near the characterized passage but concerning a different issue"
+}

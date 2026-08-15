@@ -1,0 +1,18 @@
+{
+  "input_sha256": "708eccd7e2ee92c3dcd81e222d7e2b131dcd31ae3c818161cfd0b8a15cb90147",
+  "qwen_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "qwen_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "replacement_model": "microsoft/Phi-3.5-mini-instruct",
+  "replacement_revision": "2fe192450127e6a83f7441aef6e3ca586c338b77",
+  "dtype": "float16",
+  "device": "Tesla T4",
+  "torch_version": "2.10.0+cu128",
+  "transformers_version": "5.0.0",
+  "qwen_elapsed_seconds": 198.36664390563965,
+  "replacement_elapsed_seconds": 726.0825231075287,
+  "09c_llm_results.csv_sha256": "3cbae68660f4c0cc179325d542cba2d0965ad7415bf34345c11ed1638ded57d7",
+  "09c_llm_preds.csv_sha256": "e15cbad7b1c699d708af793e4c03ac4491348f1e41257562acc8ad38792080cc",
+  "09c_llm_by_stratum.csv_sha256": "30a962039f94a14b58b45e9df27bc5904e4835af89b4724092bf8923a14c0d47",
+  "qwen_recovered_results.csv_sha256": "17ede3c5b47658ea44beabd741a744e240a4e231f6b19b583a69581ead0b7933",
+  "qwen_recovered_preds.csv_sha256": "9061a1969e75ad34832923c0075a8181a527d1f1c24a3676e993eec96fa70e52"
+}

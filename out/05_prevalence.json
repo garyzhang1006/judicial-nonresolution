@@ -1,0 +1,30 @@
+{
+ "audit": [
+  [
+   "opinions with extractable text in the 14 courts",
+   1998580
+  ],
+  [
+   "E2 usable filing date",
+   1998469
+  ],
+  [
+   "E3 text at least 1000 characters",
+   1241214
+  ],
+  [
+   "E4 not blocked",
+   943689
+  ],
+  [
+   "E5 deduplicated",
+   928254
+  ]
+ ],
+ "dictionary_sha1": "c23210667a4e4eef7ef438d898775918944043b5",
+ "n_eligible": 928254,
+ "n_with_trigger": 175610,
+ "prevalence": 0.18918313306487233,
+ "n_occurrences": 250781,
+ "n_words": 2670672009
+}

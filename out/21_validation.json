@@ -1,0 +1,9 @@
+{
+ "n_matched": 27,
+ "n_genuine": 15,
+ "precision": 0.5555555555555556,
+ "n_distinct": 10,
+ "esc_all": 5,
+ "esc_dedup": 4,
+ "rate_dedup": 0.4
+}

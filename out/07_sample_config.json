@@ -1,0 +1,22 @@
+{
+ "seed": 20260811,
+ "quota": {
+  "PLAIN": 500,
+  "H1": 450,
+  "H2": 300,
+  "CTRL_HOLD": 400,
+  "CTRL_RAND": 150
+ },
+ "held_out_courts": [
+  "ca5",
+  "cadc"
+ ],
+ "temporal_cut": 2018,
+ "n": 1800,
+ "splits": {
+  "DEV": 702,
+  "TEST": 575,
+  "TEMPORAL": 262,
+  "COURT": 261
+ }
+}

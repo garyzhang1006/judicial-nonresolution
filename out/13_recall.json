@@ -1,0 +1,83 @@
+{
+ "n_sampled": 4000,
+ "n_with_probe": 713,
+ "share_with_probe": 0.17825,
+ "n_with_extractable_issue": 502,
+ "per_probe": {
+  "P01": {
+   "name": "need not address",
+   "n": 128,
+   "share": 0.032
+  },
+  "P02": {
+   "name": "need not consider",
+   "n": 92,
+   "share": 0.023
+  },
+  "P03": {
+   "name": "need not resolve",
+   "n": 46,
+   "share": 0.0115
+  },
+  "P04": {
+   "name": "no occasion to decide",
+   "n": 14,
+   "share": 0.0035
+  },
+  "P05": {
+   "name": "leave open the question",
+   "n": 45,
+   "share": 0.01125
+  },
+  "P06": {
+   "name": "decline to consider/resolve/reach",
+   "n": 80,
+   "share": 0.02
+  },
+  "P07": {
+   "name": "assume arguendo",
+   "n": 111,
+   "share": 0.02775
+  },
+  "P08": {
+   "name": "we may assume",
+   "n": 44,
+   "share": 0.011
+  },
+  "P09": {
+   "name": "pretermit",
+   "n": 18,
+   "share": 0.0045
+  },
+  "P10": {
+   "name": "do not address/consider/resolve",
+   "n": 254,
+   "share": 0.0635
+  },
+  "P11": {
+   "name": "save for another day",
+   "n": 0,
+   "share": 0.0
+  },
+  "P12": {
+   "name": "for purposes of this appeal we assume",
+   "n": 1,
+   "share": 0.00025
+  },
+  "P13": {
+   "name": "intimate no view",
+   "n": 9,
+   "share": 0.00225
+  },
+  "P14": {
+   "name": "put to one side / set aside the question",
+   "n": 0,
+   "share": 0.0
+  },
+  "P15": {
+   "name": "stop short of deciding",
+   "n": 0,
+   "share": 0.0
+  }
+ }
+}
